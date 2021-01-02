@@ -17,10 +17,13 @@ const mainButton = document.getElementById('js-start')
 const sessionNumber = document.querySelector('.session')
 const reset = document.getElementById('js-reset')
 const progress = document.getElementById('js-progress')
+const buttonSound = new Audio('/assets/sound/Pop-sound-effect.mp3')
 
 /*----- event listeners -----*/
 modeButtons.addEventListener('click', handleMode)
 mainButton.addEventListener('click', () => {
+  buttonSound.currentTime = 0
+  buttonSound.play()
   const { action } = mainButton.dataset
   if (action === 'start') {
     startTimer()
@@ -36,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   switchMode('pomodoro')
 })
 reset.addEventListener('mousedown', () => {
+  buttonSound.currentTime = 0
+  buttonSound.play()
   stopTimer()
   sessionNumber.innerText = 'Session:'
   reset.classList.add('active')
@@ -65,6 +70,7 @@ function getRemainingTime(end) {
 }
 
 function startTimer() {
+  document.querySelector(`[data-sound="${timer.mode}"]`).play()
   let { total } = timer.remainingTime
   //get the exact time in the future when the timer will end
   const end = Date.parse(new Date()) + total * 1000
