@@ -102,7 +102,7 @@ button:active {
   outline: none;
 }
 
-.main-buttons.active {
+.main-button.active {
   transform: translateY(6px);
   box-shadow: none;
   outline: none;
